@@ -57,7 +57,11 @@ add_action('wp_enqueue_scripts', 'challenge_enqueue_scripts', 10);
 function challenge_enqueue_scripts() {
 	wp_enqueue_style('frontend', CC_PLUGIN_ASSETS . 'css/frontend_styles.css');
 	wp_enqueue_style('admin', CC_PLUGIN_ASSETS . 'css/admin_styles.css');
+	wp_register_script('challenge-form', CC_PLUGIN_ASSETS . 'js/challenge-form.js', ['jquery', 'jquery-form'], false, true);
+	wp_localize_script('challenge-form', 'cc_submit_params', ['ajax_url' => 'admin-ajax.php']);
+	wp_enqueue_script('challenge-form');
 }
 
 require_once CC_PLUGIN_TEMPLATES . 'form/includes/challenge_submission_shortcode.class.php';
 require_once CC_PLUGIN_TEMPLATES . 'form/includes/challenge_submission_data.class.php';
+require_once CC_PLUGIN_TEMPLATES . 'form/includes/challenge_submission_handler.class.php';

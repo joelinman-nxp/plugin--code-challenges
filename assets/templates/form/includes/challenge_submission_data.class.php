@@ -13,14 +13,14 @@ if ( ! class_exists( 'Challenge_submission_data', false ) ) :
 		
 		public function __construct() {
 			add_action( 'init', [ $this, 'register_challenge_cpt' ] );
-			add_action( 'add_meta_box', [ $this, 'create_content_metabox' ] );
+			add_action( 'add_meta_boxes', [ $this, 'create_content_metabox' ] );
 		}
 		
 		//Register New 'challenge' Post Type for form submissions
 		public function register_challenge_cpt() {
 			if ( ! post_type_exists( 'challenge_sub' ) ) :
 				register_post_type( 'challenge_sub', [
-					'labels'          => [
+					'labels'            => [
 						'name'                  => __( 'Challenges', CC_TEXT_DOMAIN ),
 						'singular_name'         => __( 'Challenge', CC_TEXT_DOMAIN ),
 						'all_items'             => __( 'All Challenges', CC_TEXT_DOMAIN ),
@@ -39,20 +39,29 @@ if ( ! class_exists( 'Challenge_submission_data', false ) ) :
 						'items_list_navigation' => __( 'Challenge Submissions Navigation', CC_TEXT_DOMAIN ),
 						'items_list'            => __( 'Challenge Submissions List', CC_TEXT_DOMAIN ),
 					],
-					'description'     => __( 'Check out all these submitted Challenges', CC_TEXT_DOMAIN ),
-					'public'          => true,
-					'show_ui'         => true,
-					'menu_icon'       => 'dashicons-superhero',
-					'capability_type' => 'post',
-					'has_archive'     => true,
-					'rewrite'         => _x( 'challenge-submissions', 'slug', CC_TEXT_DOMAIN )
+					'description'       => __( 'Check out all these submitted Challenges', CC_TEXT_DOMAIN ),
+					'public'            => false,
+					'show_ui'           => true,
+					'menu_icon'         => 'dashicons-superhero',
+					'capability_type'   => 'post',
+					'has_archive'       => false,
+					'map_meta_cap'      => true,
+					'query_var'         => true,
+					'supports'          => [ 'title' ],
+					'rewrite'           => _x( 'challenge-submissions', 'slug', CC_TEXT_DOMAIN ) ? [
+						'slug'       => _x( 'challenge-submissions', 'slug', CC_TEXT_DOMAIN ),
+						'with_front' => false,
+						'feeds'      => true
+					] : false,
+					'show_in_rest'      => true,
+					'show_in_nav_menus' => true
 				] );
 			endif;
 		}
 		
 		// Add new metabox for admin challenge view
 		public function create_content_metabox() {
-			$submissions = [ 'post-type', 'challenge_submissions' ];
+			$submissions = [ 'post-type', 'challenge_sub' ];
 			foreach ( $submissions as $submission ) {
 				add_meta_box(
 					'submitted_challenge',
