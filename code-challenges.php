@@ -12,7 +12,7 @@
  * License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Text Domain: code-challenges
  * Requires at least: 4.9
- * Tested up to: 5.9
+ * Tested up to: 6.0
  * Requires PHP: 7.4
  *
  * This program is free software; you can redistribute it and/or modify it under the terms of the GNU
@@ -25,16 +25,39 @@
 
 defined( 'ABSPATH' ) || exit;
 
+/**
+ * DEFINE REQUIRED PATHS & VARIABLES
+ */
+
 if ( ! defined( 'CC_PLUGIN_FILE' ) ) {
 	define( 'CC_PLUGIN_FILE', __FILE__ );
 }
-
 if ( ! defined( 'CC_PLUGIN_URL' ) ) {
 	define( 'CC_PLUGIN_URL', untrailingslashit( plugins_url( '/', CC_PLUGIN_FILE ) ) );
 }
-
 if ( ! defined( 'CC_PLUGIN_PATH' ) ) {
 	define( 'CC_PLUGIN_PATH', untrailingslashit( plugin_dir_path( CC_PLUGIN_FILE ) ) );
 }
+if ( ! defined( 'CC_PLUGIN_TEMPLATES' ) ) {
+	define( 'CC_PLUGIN_TEMPLATES', plugin_dir_path( CC_PLUGIN_FILE ) . 'assets/templates/');
+}
+if ( ! defined( 'CC_PLUGIN_ASSETS' ) ) {
+	define( 'CC_PLUGIN_ASSETS', CC_PLUGIN_URL . '/assets/');
+}
+if ( ! defined( 'CC_TEXT_DOMAIN' ) ) {
+	define( 'CC_TEXT_DOMAIN', 'code-challenges' );
+}
 
-include_once dirname( CC_PLUGIN_FILE ) . '/includes/installDB.class.php';
+/**
+ * LOAD ALL SCRIPTS
+ */
+
+add_action('wp_enqueue_scripts', 'challenge_enqueue_scripts', 10);
+
+function challenge_enqueue_scripts() {
+	wp_enqueue_style('frontend', CC_PLUGIN_ASSETS . 'css/frontend_styles.css');
+	wp_enqueue_style('admin', CC_PLUGIN_ASSETS . 'css/admin_styles.css');
+}
+
+require_once CC_PLUGIN_TEMPLATES . 'form/includes/challenge_submission_shortcode.class.php';
+require_once CC_PLUGIN_TEMPLATES . 'form/includes/challenge_submission_data.class.php';

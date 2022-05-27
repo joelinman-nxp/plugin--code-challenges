@@ -1,0 +1,25 @@
+.challenge-form-wrapper {
+	background: rgba(255, 255, 255, 0.75);
+	padding: 3% 3%;
+}
+.challenge-btn {
+	background: #7700c7 !important;
+	border-color: #330156 !important;
+	position: relative;
+	margin-top: 7%;
+	width: 65%;
+}
+.challenge-btn:hover{
+	box-shadow: 0 0 0 0.2rem rgba(122, 0, 255, 0.31) !important;
+}
+.challenge-fields {
+	color: #7700c7 !important;
+}
+.challenge-fields:focus {
+	border-color: #7700c7 !important;
+	box-shadow: 0 0 0 0.2rem rgba(122, 0, 255, 0.31) !important;
+}
+option:disabled, option:focus {
+	background-color: #7700c7 !important;
+	color: #ffffff !important;
+}

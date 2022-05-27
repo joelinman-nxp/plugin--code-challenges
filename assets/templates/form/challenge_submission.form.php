@@ -6,12 +6,12 @@
  * Time: 14:39
  */
 ?>
-<div class="form-group challenge-form container">
-	<form name="challenge_submissions" action="challenge-submission.processor.php" method="post">
+<div class="challenge-form-wrapper container">
+	<form name="challenge_submissions" method="post">
 		<div class="row">
-			<div class="form-group col-sm-6">">
+			<div class="form-group col-sm-6">
 				<?php // Name the Challenge - title ?>
-				<label for="challenge_name">Challenge Name:</label>
+				<label for="challenge_name" >Challenge Name:</label>
 				<input type="text" name="challenge_name" id="challenge_name" class="form-control challenge-fields" required>
 			</div>
 			<div class="form-group col-sm-6">
@@ -35,7 +35,7 @@
 			<div class="col-12">
 				<?php // big text area for the Challenge description/rules ?>
 				<label for="challenge_desc">Challenge Description:</label>
-				<textarea name="challenge_desc" id="challenge_desc" class="form-control challenge-fields" required></textarea>
+				<textarea name="challenge_desc" id="challenge_desc" class="form-control challenge-fields" rows="10" cols="50" required></textarea>
 			</div>
 		</div>
 		<div class="row">
