@@ -18,22 +18,22 @@ if ( ! class_exists( 'Challenge_submission_handler' ) ) :
 		
 		public function handle_form() {
 			
-			$nonce_val = $_POST['code-challenge-submit-nonce'];
+			$nonce_val = $_POST[ 'code-challenge-submit-nonce' ];
 			
 			if ( ! wp_verify_nonce( $nonce_val, 'code_challenge_submit' ) ) :
 				return;
 			endif;
 			
-			if ( empty( $_POST['action'] ) || 'code_challenge_submit' !== $_POST['action'] ) :
+			if ( empty( $_POST[ 'action' ] ) || 'code_challenge_submit' !== $_POST[ 'action' ] ) :
 				return;
 			endif;
 			
-			$refer_url = get_home_url() . $_POST['_wp_http_referer'];
+			$refer_url = get_home_url() . $_POST[ '_wp_http_referer' ];
 			
-			$challenge_name     = ! empty( $_POST['challenge_name'] ) ? $_POST['challenge_name'] : '';
-			$challenge_language = ! empty( $_POST['challenge_language'] ) ? $_POST['challenge_language'] : '';
-			$challenge_desc     = ! empty( $_POST['challenge_desc'] ) ? $_POST['challenge_desc'] : '';
-			$challenge_r        = ! empty( $_POST['challenge_r'] ) ? $_POST['challenge_r'] : '';
+			$challenge_name     = ! empty( $_POST[ 'challenge_name' ] ) ? $_POST[ 'challenge_name' ] : '';
+			$challenge_language = ! empty( $_POST[ 'challenge_language' ] ) ? $_POST[ 'challenge_language' ] : '';
+			$challenge_desc     = ! empty( $_POST[ 'challenge_desc' ] ) ? $_POST[ 'challenge_desc' ] : '';
+			$challenge_r        = ! empty( $_POST[ 'challenge_r' ] ) ? $_POST[ 'challenge_r' ] : '';
 			
 			
 			if ( post_type_exists( 'challenge_sub' ) ) :
@@ -52,7 +52,7 @@ if ( ! class_exists( 'Challenge_submission_handler' ) ) :
 				endif;
 			
 			endif;
-			wp_safe_redirect($refer_url);
+			wp_safe_redirect( '/thanks-mate' );
 		}
 		
 	}

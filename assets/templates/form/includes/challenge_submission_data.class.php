@@ -69,7 +69,7 @@ if ( ! class_exists( 'Challenge_submission_data', false ) ) :
 					[ $this, 'render_metabox_content' ],
 					$submission,
 					'advanced',
-					'high'
+					'high',
 				);
 			}
 		}
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Challenge_submission_data', false ) ) :
 						continue;
 					endif;
 					// output challenge details
-					echo '<b><h2>' . strtoupper( str_replace( '_', ' ', $key ) ) . ':</b></h2>' . $meta_array[0] . '<br>';
+					echo '<h2 class="submission-heading"><b>' . strtoupper( str_replace( '_', ' ', $key ) ) . ':</b></h2>' . $meta_array[0] . '<br>';
 				}
 			endif;
 		}
